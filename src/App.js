@@ -1,6 +1,6 @@
 import "./App.css";
 import { useEffect, useState } from "react";
-import BookPage from "./components/bookpage";
+import BookPage from "./components/bookpage/bookpage.jsx";
 
 function App() {
   const [books, setBooks] = useState([]);
