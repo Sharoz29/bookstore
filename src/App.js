@@ -1,6 +1,9 @@
 import "./App.css";
 import { useEffect, useState } from "react";
-import BookPage from "./components/bookpage/bookpage.jsx";
+import BookPage from "./routes/bookpage/bookpage";
+import { createBrowserRouter } from "react-router-dom";
+import { RouterProvider } from "react-router-dom";
+import BookInfo from "./routes/bookinfopage/bookInfo.jsx";
 
 function App() {
   const [books, setBooks] = useState([]);
@@ -14,9 +17,15 @@ function App() {
     };
     fetchBooks();
   }, [books]);
-  // console.log(books);
 
-  return <BookPage books={books} />;
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <BookPage books={books} />,
+    },
+  ]);
+
+  return <RouterProvider router={router} />;
 }
 
 export default App;

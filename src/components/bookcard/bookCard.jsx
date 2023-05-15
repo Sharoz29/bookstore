@@ -1,19 +1,31 @@
 import "./bookCard.css";
-import FavouriteButton from "../favouritebutton/favouriteButton";
-import MoreInfoButton from "../moreinfobutton/moreInfobutton";
+import { ReactComponent as FavouriteIcon } from "../../assets/heart-svgrepo-com.svg";
+import { ReactComponent as InfoIcon } from "../../assets/info-circle-svgrepo-com.svg";
+import BookModal from "../bookmodal/bookmodal";
+
+import { useState } from "react";
 
 const BookCard = ({ book }) => {
   const bookImage = book["formats"]["image/jpeg"];
-  const [authorNameArr] = book["authors"];
 
-  const author = authorNameArr.name;
+  // console.log(authorNameArr);
+  const [showInfo, setShowInfo] = useState(false);
+
+  const openModal = () => {
+    setShowInfo(true);
+  };
+  const closeModal = () => {
+    setShowInfo(false);
+  };
+
   return (
     <div className="book-data-container" key={book.id}>
-      <h1 className="book-name">{book.title.slice(0, 25)}</h1>
       <img className="book-image" alt="" src={bookImage} />
-      <h3 className="author">{author}</h3>
-      <FavouriteButton />
-      <MoreInfoButton />
+      <div className="icons-container">
+        <FavouriteIcon className="icon fav-icon" />
+        <InfoIcon className="icon info-icon" onClick={openModal} />
+        {showInfo && <BookModal bookInfo={[book]} closeModal={closeModal} />}
+      </div>
     </div>
   );
 };
