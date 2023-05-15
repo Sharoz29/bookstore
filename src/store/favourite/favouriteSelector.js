@@ -2,6 +2,6 @@ import { createSelector } from "reselect";
 
 const favouriteState = (state) => state.favouriteReducer;
 
-const favourites = (favouriteReducer) => favouriteReducer.favouritesfavourites;
+const favourites = (favouriteReducer) => favouriteReducer.favourites;
 
-export const makeSelectUsers = createSelector(favouriteState, favourites);
+export const makeFavourites = createSelector(favouriteState, favourites);

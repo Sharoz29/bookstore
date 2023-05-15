@@ -1,11 +1,9 @@
 import "./bookmodal.css";
-import { useState } from "react";
 
 const BookModal = ({ bookInfo, closeModal }) => {
   const [book] = bookInfo;
   const bookImage = book["formats"]["image/jpeg"];
   const [authorNameArr] = book["authors"];
-  console.log(book);
 
   return (
     <div className="modal-container">

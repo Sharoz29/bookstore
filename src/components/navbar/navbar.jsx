@@ -17,7 +17,7 @@ const Navbar = () => {
             />
           </form>
         </Link>
-        <Link className="link" to={"/favourite"}>
+        <Link className="link" to={"/favourites"}>
           <span className="favs">Favorites</span>
         </Link>
       </div>

@@ -11,6 +11,7 @@ export const favouriteReducer = (state = INITITAL_STATE, action) => {
         ...state,
         favourites: payload,
       };
+
     default:
       return state;
   }
