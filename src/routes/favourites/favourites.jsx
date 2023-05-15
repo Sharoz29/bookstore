@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import BookModal from "../../components/bookmodal/bookmodal";
 import { ReactComponent as InfoIcon } from "../../assets/info-circle-svgrepo-com.svg";
 import { useState } from "react";
-
+import { ReactComponent as RemoveIcon } from "../../assets/remove-circular-button-svgrepo-com.svg";
 const favouritesStateSelector = createSelector(
   makeFavourites,
   (favourites) => ({
@@ -41,10 +41,13 @@ const FavouritePage = () => {
                 alt=""
                 src={myFavourite["formats"]["image/jpeg"]}
               />
-              <InfoIcon className="icon fav-info-icon" onClick={openModal} />
-              {showInfo && (
-                <BookModal bookInfo={[myFavourite]} closeModal={closeModal} />
-              )}
+              <div className="icons-container" id={myFavourite.id}>
+                <RemoveIcon className="icon remove-icon" />
+                <InfoIcon className="icon info-icon" onClick={openModal} />
+                {showInfo && (
+                  <BookModal bookInfo={[myFavourite]} closeModal={closeModal} />
+                )}
+              </div>
             </div>
           );
         })}
