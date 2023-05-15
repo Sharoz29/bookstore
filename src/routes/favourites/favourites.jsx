@@ -65,7 +65,7 @@ const FavouritePage = () => {
         <div className="favs-container">
           {favourites.map((favBook, i) => {
             const [myFavourite] = favBook;
-            // console.log(myFavourite);
+            console.log(favBook);
             return (
               <div className="book-data-container" key={i}>
                 <img
@@ -79,21 +79,26 @@ const FavouritePage = () => {
                     onClick={removeFromFavourites}
                     id={myFavourite.id}
                   />
-                  <InfoIcon className="icon info-icon" onClick={openModal} />
+                  <InfoIcon
+                    className="icon info-icon"
+                    onClick={openModal}
+                    id={myFavourite.id}
+                  />
                   {showInfo && (
-                    <BookModal
-                      bookInfo={[myFavourite]}
-                      closeModal={closeModal}
-                    />
+                    <BookModal bookInfo={favBook} closeModal={closeModal} />
                   )}
                 </div>
               </div>
             );
           })}
         </div>
-        <button className="clear-btn">Clear Favourites</button>
+        {favourites.length !== 0 && (
+          <button className="clear-btn">Clear Favourites</button>
+        )}
       </div>
     </Fragment>
   );
 };
 export default FavouritePage;
+
+//Change modal data inside the favourites page

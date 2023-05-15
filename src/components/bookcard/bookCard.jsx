@@ -53,19 +53,18 @@ const BookCard = ({ book }) => {
     }
 
     if (favourites.length !== 0) {
-      const existingBook = favourites.find((book) => {
+      const existingBook = favourites.find(([book]) => {
         return book.id === bookToAdd[0].id;
       });
+
       if (existingBook) {
-        return [];
+        return [...favourites];
       }
       if (!existingBook) {
         return [...favourites, bookToAdd];
       }
     }
   };
-
-  // if (favourites.length !== 0) console.log(favourites);
 
   return (
     <div className="book-data-container" key={book.id}>
