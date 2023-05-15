@@ -1,13 +1,33 @@
+.fav-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
 .favs-container {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   margin-left: 1rem;
   justify-content: space-evenly;
+  width: 100%;
 }
 .my-favs {
   margin-left: 1rem;
 }
 .remove-icon {
   fill: rgb(255, 0, 0);
+}
+.clear-btn {
+  margin: 2.5rem 0;
+  background-color: rgb(255, 0, 0);
+  color: white;
+  padding: 1rem;
+  border: none;
+  border-radius: 1rem;
+}
+.clear-btn:hover {
+  background-color: rgb(170, 7, 7);
+  transform: scale(1.1);
+  transition: 1s;
 }

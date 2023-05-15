@@ -8,6 +8,9 @@ import BookModal from "../../components/bookmodal/bookmodal";
 import { ReactComponent as InfoIcon } from "../../assets/info-circle-svgrepo-com.svg";
 import { useState } from "react";
 import { ReactComponent as RemoveIcon } from "../../assets/remove-circular-button-svgrepo-com.svg";
+import { setFavourites } from "../../store/favourite/favouriteAction";
+import { useDispatch } from "react-redux";
+
 const favouritesStateSelector = createSelector(
   makeFavourites,
   (favourites) => ({
@@ -15,42 +18,80 @@ const favouritesStateSelector = createSelector(
   })
 );
 
+const favouritesActionDispatcher = (dispatch) => ({
+  setFavourites: (favourites) => dispatch(setFavourites(favourites)),
+});
+
 const FavouritePage = () => {
   const { favourites } = useSelector(favouritesStateSelector);
+  const { setFavourites } = favouritesActionDispatcher(useDispatch());
   const [showInfo, setShowInfo] = useState(false);
 
-  const openModal = (e) => {
+  const openModal = () => {
     setShowInfo(true);
   };
-  const closeModal = (e) => {
+  const closeModal = () => {
     setShowInfo(false);
+  };
+
+  const removeBook = (favourites, bookToRemove) => {
+    return favourites.filter(([book]) => book.id !== bookToRemove.id);
+  };
+
+  const removedbookItem = (bookToRemove) => {
+    setFavourites(removeBook(favourites, bookToRemove));
+  };
+
+  const removeFromFavourites = (e) => {
+    const removeId = Number(e.target.parentElement.id);
+    const [removed] = favourites.filter(([book]) => {
+      if (book.id === removeId) {
+        return book;
+      }
+    });
+
+    removedbookItem(removed[0]);
   };
 
   return (
     <Fragment>
       <Navbar />
-      <h1 className="my-favs">My Favourites</h1>
-      <div className="favs-container">
-        {favourites.map((favBook, i) => {
-          const [myFavourite] = favBook;
-          // console.log(myFavourite);
-          return (
-            <div className="book-data-container" key={i}>
-              <img
-                className="book-image"
-                alt=""
-                src={myFavourite["formats"]["image/jpeg"]}
-              />
-              <div className="icons-container" id={myFavourite.id}>
-                <RemoveIcon className="icon remove-icon" />
-                <InfoIcon className="icon info-icon" onClick={openModal} />
-                {showInfo && (
-                  <BookModal bookInfo={[myFavourite]} closeModal={closeModal} />
-                )}
+      <div className="fav-page-container">
+        <h1 className="my-favs">
+          {favourites.length !== 0
+            ? "My favourites"
+            : "Currently, you dont have any favourite books :("}
+        </h1>
+        <div className="favs-container">
+          {favourites.map((favBook, i) => {
+            const [myFavourite] = favBook;
+            // console.log(myFavourite);
+            return (
+              <div className="book-data-container" key={i}>
+                <img
+                  className="book-image"
+                  alt=""
+                  src={myFavourite["formats"]["image/jpeg"]}
+                />
+                <div className="icons-container" id={myFavourite.id}>
+                  <RemoveIcon
+                    className="icon remove-icon"
+                    onClick={removeFromFavourites}
+                    id={myFavourite.id}
+                  />
+                  <InfoIcon className="icon info-icon" onClick={openModal} />
+                  {showInfo && (
+                    <BookModal
+                      bookInfo={[myFavourite]}
+                      closeModal={closeModal}
+                    />
+                  )}
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
+        <button className="clear-btn">Clear Favourites</button>
       </div>
     </Fragment>
   );
