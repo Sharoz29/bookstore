@@ -1,6 +1,7 @@
 import "./bookmodal.css";
 
 const BookModal = ({ bookInfo, closeModal }) => {
+  console.log(bookInfo);
   const [book] = bookInfo;
   const bookImage = book["formats"]["image/jpeg"];
   const [authorNameArr] = book["authors"];

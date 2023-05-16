@@ -23,8 +23,10 @@ const favouritesActionDispatcher = (dispatch) => ({
 
 const BookCard = ({ book }) => {
   const bookImage = book["formats"]["image/jpeg"];
-  const [clicked, setClicked] = useState(false);
+  const { favourites } = useSelector(favouritesStateSelector);
+  const { setFavourites } = favouritesActionDispatcher(useDispatch());
 
+  const [fav, setFav] = useState(false);
   const [showInfo, setShowInfo] = useState(false);
 
   const openModal = () => {
@@ -34,16 +36,13 @@ const BookCard = ({ book }) => {
     setShowInfo(false);
   };
 
-  const { favourites } = useSelector(favouritesStateSelector);
-  const { setFavourites } = favouritesActionDispatcher(useDispatch());
-
   const addingToFavourite = (e) => {
     const bookId = Number(e.target.parentElement.id);
 
     if (bookId === book.id) {
       const newBook = [book];
       addingFavourites(newBook);
-      setClicked(true);
+      setFav(true);
     }
   };
   const addingFavourites = (bookToAdd) => {
@@ -68,12 +67,13 @@ const BookCard = ({ book }) => {
       }
     }
   };
+  console.log(fav);
 
   return (
     <div className="book-data-container" key={book.id}>
       <img className="book-image" alt="" src={bookImage} />
       <div className="icons-container" id={book.id}>
-        {!clicked ? (
+        {!fav ? (
           <FavouriteIcon
             className={"icon fav-icon"}
             onClick={addingToFavourite}
