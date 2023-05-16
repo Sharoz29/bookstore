@@ -4,25 +4,17 @@ import BookPage from "./routes/bookpage/bookpage";
 import { createBrowserRouter } from "react-router-dom";
 import { RouterProvider } from "react-router-dom";
 import FavouritePage from "./routes/favourites/favourites";
+import useFetcher from "./fetcher";
+import { requests } from "./requests";
 
 function App() {
-  const [books, setBooks] = useState([]);
-  useEffect(() => {
-    async function fetchBooks() {
-      const booksRes = await fetch(`https://gutendex.com/books`);
-      const booksDataArr = await booksRes.json();
-      const booksData = booksDataArr.results;
-      setBooks(booksData);
-    }
-    fetchBooks();
-  }, [books]);
-
-  // console.log(books);
+  const [books] = useFetcher(requests.mainPage);
+  const [secondpageBooks] = useFetcher(requests.secondpage);
 
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <BookPage books={books} />,
+      element: <BookPage books={books} secondBooks={secondpageBooks} />,
     },
     {
       path: "/favourites",
