@@ -40,7 +40,7 @@ const FavouritePage = () => {
           {favourites.map((favBook, i) => {
             const [myFavourite] = favBook;
             // console.log(favBook);
-            return <FavouriteBookCard myFavourite={myFavourite} />;
+            return <FavouriteBookCard myFavourite={myFavourite} key={i} />;
           })}
         </div>
         {favourites.length !== 0 && (

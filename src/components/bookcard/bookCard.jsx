@@ -27,6 +27,7 @@ const BookCard = ({ book }) => {
   const { setFavourites } = favouritesActionDispatcher(useDispatch());
 
   const [fav, setFav] = useState(false);
+
   const [showInfo, setShowInfo] = useState(false);
 
   const openModal = () => {
@@ -42,9 +43,10 @@ const BookCard = ({ book }) => {
     if (bookId === book.id) {
       const newBook = [book];
       addingFavourites(newBook);
-      setFav(true);
     }
+    setFav(true);
   };
+
   const addingFavourites = (bookToAdd) => {
     setFavourites(addedFavourite(favourites, bookToAdd));
   };
@@ -67,7 +69,6 @@ const BookCard = ({ book }) => {
       }
     }
   };
-  console.log(fav);
 
   return (
     <div className="book-data-container" key={book.id}>
@@ -77,6 +78,7 @@ const BookCard = ({ book }) => {
           <FavouriteIcon
             className={"icon fav-icon"}
             onClick={addingToFavourite}
+            id={book.id}
           />
         ) : (
           <FavoriteFilledIcon className="icon fav-clicked-icon" />

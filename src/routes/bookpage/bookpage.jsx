@@ -12,6 +12,11 @@ const BookPage = ({ books }) => {
           <BookCard book={book} key={book.id} />
         ))}
       </div>
+      {books.length !== 0 && (
+        <div className="btn-container">
+          <button className="load-more-btn">Load More</button>
+        </div>
+      )}
     </Fragment>
   );
 };
