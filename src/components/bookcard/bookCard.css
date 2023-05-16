@@ -25,6 +25,12 @@
 .info-icon {
   fill: #000;
 }
+.fav-clicked-icon {
+  fill: rgb(218, 28, 76);
+}
+.fav-clicked-icon:hover {
+  transform: scale(1) !important;
+}
 
 .icon {
   width: 2.5rem;

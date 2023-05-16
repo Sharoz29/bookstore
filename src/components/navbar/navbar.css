@@ -19,6 +19,13 @@
   text-transform: uppercase;
   font-style: italic;
 }
+.books-icon {
+  fill: white;
+}
+.books-icon:hover {
+  transform: scale(1);
+}
+
 .searchbar-container {
   width: 20rem;
   border: 1px solid white;

@@ -52,6 +52,9 @@ const FavouritePage = () => {
 
     removedbookItem(removed[0]);
   };
+  const clearFavourites = () => {
+    setFavourites([]);
+  };
 
   return (
     <Fragment>
@@ -93,7 +96,9 @@ const FavouritePage = () => {
           })}
         </div>
         {favourites.length !== 0 && (
-          <button className="clear-btn">Clear Favourites</button>
+          <button className="clear-btn" onClick={clearFavourites}>
+            Clear Favourites
+          </button>
         )}
       </div>
     </Fragment>

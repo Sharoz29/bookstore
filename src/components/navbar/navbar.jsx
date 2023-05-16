@@ -1,10 +1,12 @@
 import "./navbar.css";
 import { Link } from "react-router-dom";
+import { ReactComponent as BooksIcon } from "../../assets/books-svgrepo-com.svg";
 
 const Navbar = () => {
   return (
     <div className="navbar-container">
       <div className="navbar-content">
+        <BooksIcon className="books-icon icon" />
         <Link to={"/"} className="link">
           <span className="books">Books</span>
         </Link>

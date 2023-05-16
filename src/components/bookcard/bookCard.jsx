@@ -8,6 +8,7 @@ import { setFavourites } from "../../store/favourite/favouriteAction";
 import { makeFavourites } from "../../store/favourite/favouriteSelector";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { ReactComponent as FavoriteFilledIcon } from "../../assets/black-heart-svgrepo-com.svg";
 
 const favouritesStateSelector = createSelector(
   makeFavourites,
@@ -22,6 +23,7 @@ const favouritesActionDispatcher = (dispatch) => ({
 
 const BookCard = ({ book }) => {
   const bookImage = book["formats"]["image/jpeg"];
+  const [clicked, setClicked] = useState(false);
 
   const [showInfo, setShowInfo] = useState(false);
 
@@ -41,6 +43,7 @@ const BookCard = ({ book }) => {
     if (bookId === book.id) {
       const newBook = [book];
       addingFavourites(newBook);
+      setClicked(true);
     }
   };
   const addingFavourites = (bookToAdd) => {
@@ -70,7 +73,14 @@ const BookCard = ({ book }) => {
     <div className="book-data-container" key={book.id}>
       <img className="book-image" alt="" src={bookImage} />
       <div className="icons-container" id={book.id}>
-        <FavouriteIcon className="icon fav-icon" onClick={addingToFavourite} />
+        {!clicked ? (
+          <FavouriteIcon
+            className={"icon fav-icon"}
+            onClick={addingToFavourite}
+          />
+        ) : (
+          <FavoriteFilledIcon className="icon fav-clicked-icon" />
+        )}
         <InfoIcon className="icon info-icon" onClick={openModal} />
         {showInfo && <BookModal bookInfo={[book]} closeModal={closeModal} />}
       </div>
